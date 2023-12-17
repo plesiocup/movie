@@ -60,7 +60,7 @@ export async function timerTrigger(myTimer: Timer, context: InvocationContext): 
 }
 
 app.timer('timerTrigger', {
-    schedule: '0 */1 * * * *',
+    schedule: "0 */10 * * * *",
     handler: timerTrigger
 });
 
