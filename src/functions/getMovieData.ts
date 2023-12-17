@@ -2,14 +2,14 @@ import { app, HttpRequest, HttpResponseInit, InvocationContext } from '@azure/fu
 
 // タイトル、説明、映画カテゴリ、再生時間、評価、評価した人数、公開年、映画のURL
 interface MovieData {
-  title: string
-  description: string
-  category: string
-  play_time: number
-  evaluation: number
-  evaluated_count: number
-  release_year: number
-  movie_url: string
+  Title: string
+  Description: string
+  Category: string
+  Playtime: number
+  Evaluation: number
+  EvaluatedCount: number
+  ReleaseYear: number
+  MovieURL: string
 }
 
 export async function getMovieData(
@@ -30,20 +30,20 @@ export async function getMovieData(
     // id: 565770,
     // https://www.themoviedb.org/movie/565770-blue-beetle/watch?locale=AE
     //   スネークケースに変換
-    let movieTitle = responseMovieData.title
+    let movieTitle = responseMovieData.Title
     movieTitle = movieTitle.toLowerCase().replace(/ /g, '-')
     const movieUrl = `https://www.themoviedb.org/movie/${responseMovieData.id}-${responseMovieData.original_title}/watch?locale=AE`
 
     const category = getGenreNameById(responseMovieData.genre_ids[0])
     movieData.push({
-      title: responseMovieData.title,
-      description: responseMovieData.overview,
-      category: category,
-      play_time: responseMovieData.popularity,
-      evaluation: responseMovieData.vote_average / 2,
-      evaluated_count: responseMovieData.vote_count,
-      release_year: responseMovieData.release_date,
-      movie_url: movieUrl,
+      Title: responseMovieData.Title,
+      Description: responseMovieData.overview,
+      Category: category,
+      Playtime: responseMovieData.popularity,
+      Evaluation: responseMovieData.vote_average / 2,
+      EvaluatedCount: responseMovieData.vote_count,
+      ReleaseYear: responseMovieData.release_date,
+      MovieURL: movieUrl,
     })
   })
 
